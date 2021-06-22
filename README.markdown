@@ -1,4 +1,5 @@
-# hello-caveman
+# cl-swapi
+Starwars API demo in Common Lisp
 
 
 
