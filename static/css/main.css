@@ -23,6 +23,7 @@
 
 body {
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  background: var(--color-ember);
 }
 
 a {
@@ -59,4 +60,95 @@ nav a.active, nav a:hover {
 
 #main {
   text-align: center;
+}
+.list a {
+  cursor: pointer;
+  padding:0.5em 1em;
+  display: block;
+}
+
+.list a:hover {
+  background: var(--color-burnt-ember);
+}
+
+.list a.active {
+  background: var(--color-white);
+  color: var(--color-ember);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+.left-panel {
+}
+
+.right-panel {
+  padding: 1em;
+  background: var(--color-white);
+  color: var(--color-ember);
+  /*height: 100vh;*/
+}
+
+.right-panel a {
+  color: var(--color-ember);
+}
+
+table td {
+  padding: .5em;
+}
+
+table tr td:nth-child(1) {
+  font-weight: bold;
+  color: var(--color-burnt-ember);
+}
+
+table tr::odd {
+  background: var(--color-burnt-ember);
+}
+
+table tr:even {
+  background: var(--color-ember);
+}
+
+table a {
+  text-decoration: underline;
+  cursor: pointer;
+  padding:.25em;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+  height: 100%;
+}
+
+.search-wrapper label {
+  margin-left: 1em;
+}
+
+.search-box {
+  display: grid;
+  grid-template-columns: 240px 42px;
+}
+
+.search-field {
+    padding: 1em;
+    width: 240px;
+    margin-left: 1em;
+    border-radius: .25em;
+    margin-bottom: 1em;
+}
+
+.clear-button {
+  float: right;
+  font-size: 1.5em;
+  height: 42px;
+  width: 42px;
+  border-radius: .25em;
+  cursor: pointer;
+  color: var(--color-burnt-ember);
 }

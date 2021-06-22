@@ -31,19 +31,33 @@
 ;; Routing rules
 
 (defroute "/" ()
-(setq *results* (cl-json:decode-json-from-string
-                   (drakma:http-request "https://swapi.dev/api/planets/"
-                                        :method :get
-                                        )))
+  ;; (setq *results* (cl-json:decode-json-from-string
+  ;; 		   (drakma:http-request "https://swapi.dev/api/planets/"
+  ;; 					:method :get
+  ;; 					)))
 
-  (format t "~a~%" (rest (assoc :results *results*)))
+  ;; (format t "~a~%" (rest (assoc :results *results*)))
   (render #P"index.html" (list :planets (assoc :results *results*))))
 
-(defroute "/about" ()
-  (render #P"about.html"))
+(defroute "/planets" ()
+  (setq *results* (cl-json:decode-json-from-string
+		   (drakma:http-request "https://swapi.dev/api/planets/"
+					:method :get
+					)))
 
-(defroute "/contact" ()
-  (render #P"contact.html"))
+
+  (render #P"planets.html" (list :planets (assoc :results *results*))))
+
+(defroute "/people" ()
+  (setq *results* (cl-json:decode-json-from-string
+		   (drakma:http-request "https://swapi.dev/api/people/"
+					:method :get
+					)))
+
+
+  (render #P"people.html" (list :people (assoc :results *results*))))
+
+
 
 ;;
 ;; Error pages
