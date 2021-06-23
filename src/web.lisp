@@ -37,25 +37,38 @@
   ;; 					)))
 
   ;; (format t "~a~%" (rest (assoc :results *results*)))
-  (render #P"index.html" (list :planets (assoc :results *results*))))
+  (render #P"index.html" ))
 
 (defroute "/planets" ()
-  (setq *results* (cl-json:decode-json-from-string
+  (setq *planets* (cl-json:decode-json-from-string
 		   (drakma:http-request "https://swapi.dev/api/planets/"
 					:method :get
 					)))
 
 
-  (render #P"planets.html" (list :planets (assoc :results *results*))))
+  (render #P"planets.html" (list :planets (assoc :results *planets*))))
+
+(defroute "/planets/:id" (&key id)
+  (setq *planet* (cl-json:decode-json-from-string
+		   (drakma:http-request (concatenate 'string "https://swapi.dev/api/planets/" id)
+					:method :get
+					)))
+
+
+  (render #P"planets.html" (list :planets (assoc :results *results*)
+				 :planet *planet*
+				 )))
+
+
 
 (defroute "/people" ()
-  (setq *results* (cl-json:decode-json-from-string
+  (setq *people* (cl-json:decode-json-from-string
 		   (drakma:http-request "https://swapi.dev/api/people/"
 					:method :get
 					)))
 
 
-  (render #P"people.html" (list :people (assoc :results *results*))))
+  (render #P"people.html" (list :people (assoc :results *people*))))
 
 
 

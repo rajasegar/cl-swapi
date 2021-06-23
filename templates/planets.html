@@ -5,12 +5,16 @@
   <div class="left-panel">
     <ul class="list">
       {% for planet in planets %}
-        <li><a href="/planets" >{{planet.name}}</a></li>
+        <li><a href="/planets/{{forloop.counter}}" >{{planet.name}}</a></li>
       {% endfor %}
     </ul>
   </div>
   <div class="right-panel">
-    {{outlet}}
+    {% if planet %}
+	{{planet.name}}
+    {% else %}
+	<h2>Please select a planet</h2>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
