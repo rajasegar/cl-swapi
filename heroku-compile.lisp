@@ -1,2 +1,4 @@
 (ql:quickload :hello-caveman)
-(hello-caveman:start :port 3000)
+(require :asdf)
+(defvar *port* (parse-integer (asdf::getenv "PORT")))
+(hello-caveman:start :port *port*)
