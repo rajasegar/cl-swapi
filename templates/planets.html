@@ -1,5 +1,5 @@
 {% extends "layouts/default.html" %}
-{% block title %}StarWars in Common Lisp{% endblock %}
+{% block title %}Planets - Star Wars {% endblock %}
 {% block content %}
 <div class="grid">
   <div class="left-panel">
@@ -11,7 +11,49 @@
   </div>
   <div class="right-panel">
     {% if planet %}
-	{{planet.name}}
+	<h3>{{planet.name}}</h3>
+	<table>
+  <tr>
+    <td>Diameter:</td>
+    <td>{{planet.diameter}}</td>
+  </tr>
+  <tr>
+    <td>Rotation Period:</td>
+    <td>{{planet.rotation--period}}</td>
+  </tr>
+  <tr>
+    <td>Orbital Period:</td>
+    <td>{{planet.orbital--period}}</td>
+  </tr>
+  <tr>
+    <td>Gravity:</td>
+    <td>{{planet.gravity}}</td>
+  </tr>
+  <tr>
+    <td>Population:</td>
+    <td>{{planet.population}}</td>
+  </tr>
+  <tr>
+    <td>Climate:</td>
+    <td>{{planet.climate}}</td>
+  </tr>
+  <tr>
+    <td>Terrain:</td>
+    <td>{{planet.terrain}}</td>
+  </tr>
+  <tr>
+    <td>Surface water:</td>
+    <td>{{planet.surface--water}}</td>
+  </tr>
+  <tr>
+    <td>Residents:</td>
+    <td>    <p><!----></p></td>
+  </tr>
+  <tr>
+    <td>Films:</td>
+    <td>    <p><!----></p></td>
+  </tr>
+</table>
     {% else %}
 	<h2>Please select a planet</h2>
     {% endif %}

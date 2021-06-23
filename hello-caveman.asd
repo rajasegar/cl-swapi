@@ -18,10 +18,13 @@
 	       ;; json and drakma
 	       "cl-json"
 	       "drakma"
+	       "cl-who"
 
-               ;; for DB
-               "datafly"
-               "sxql")
+	       ;; for DB
+	       "datafly"
+	       "sxql"
+	       )
+
   :components ((:module "src"
                 :components
                 ((:file "main" :depends-on ("config" "view" "db"))

@@ -10,10 +10,10 @@
   <ul>
     <li><a href="/">Star Wars</a></li>
     <li>
-      <a href="/people">People</a>
+      <a href="/people" {% ifequal active-page "people" %} class="active" {% endifequal %}>People</a>
     </li>
     <li>
-      <a href="/planets">Planets</a>
+      <a href="/planets" {% ifequal active-page "planets" %} class="active" {% endifequal %}>Planets</a>
     </li>
     <li>
       <a href="/films">Films</a>
@@ -32,5 +32,6 @@
 <main>
   {% block content %}{% endblock %}
 </main>
+<script src="https://unpkg.com/htmx.org@1.4.1"></script>
 </body>
 </html>

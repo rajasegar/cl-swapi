@@ -5,10 +5,10 @@
         :hello-caveman.config
         :hello-caveman.view
         :hello-caveman.db
-        :datafly
-        :sxql
 	:cl-json
-	:drakma)
+	:drakma
+	:cl-who)
+
   (:export :*web*))
 (in-package :hello-caveman.web)
 
@@ -31,44 +31,67 @@
 ;; Routing rules
 
 (defroute "/" ()
-  ;; (setq *results* (cl-json:decode-json-from-string
-  ;; 		   (drakma:http-request "https://swapi.dev/api/planets/"
-  ;; 					:method :get
-  ;; 					)))
-
-  ;; (format t "~a~%" (rest (assoc :results *results*)))
   (render #P"index.html" ))
 
+;; Planets index route
 (defroute "/planets" ()
   (setq *planets* (cl-json:decode-json-from-string
 		   (drakma:http-request "https://swapi.dev/api/planets/"
 					:method :get
 					)))
+  ;; (format t "~a~%" (rest (assoc :results *planets*)))
+  (render #P"planets.html" (list :planets (rest (assoc :results *planets*))
+				 :active-page "planets"
+				 )))
 
-
-  (render #P"planets.html" (list :planets (assoc :results *planets*))))
-
+;; Planets show route
 (defroute "/planets/:id" (&key id)
   (setq *planet* (cl-json:decode-json-from-string
 		   (drakma:http-request (concatenate 'string "https://swapi.dev/api/planets/" id)
 					:method :get
 					)))
-
-
-  (render #P"planets.html" (list :planets (assoc :results *results*)
+  ;; (format t "~a%" *planet*)
+  (render #P"planets.html" (list :planets (rest (assoc :results *planets*))
 				 :planet *planet*
+				 :active-page "planets"
 				 )))
 
 
-
+;; People index route
 (defroute "/people" ()
   (setq *people* (cl-json:decode-json-from-string
 		   (drakma:http-request "https://swapi.dev/api/people/"
 					:method :get
 					)))
+  (render #P"people.html" (list :people (rest (assoc :results *people*))
+				:active-page "people"
+				)))
 
+;; People search route
+(defroute ("/people/search" :method :POST) (&key _parsed)
+  ;; (format t "~a~%"  (cdr (assoc "search" _parsed :test #'string=)))
+  (setq query  (cdr (assoc "search" _parsed :test #'string=)))
+  (setq *search-results* (cl-json:decode-json-from-string
+		   (drakma:http-request (concatenate 'string "https://swapi.dev/api/people/?search=" query)
+					:method :get
+					)))
+  (format t "~a~%" *search-results*)
+  (with-html-output-to-string (output nil :prologue nil)
+    (loop for p in (rest (assoc :results *search-results*))
+	  do (htm (:li
+		   (:a :href "/people/" (str (cdr (assoc :name p)))))))))
 
-  (render #P"people.html" (list :people (assoc :results *people*))))
+;; People show route
+(defroute "/people/:id" (&key id)
+  (setq *character* (cl-json:decode-json-from-string
+		   (drakma:http-request (concatenate 'string "https://swapi.dev/api/people/" id)
+					:method :get
+					)))
+  ;; (format t "~a~%" *character*)
+  (render #P"people.html" (list :people (rest (assoc :results *people*))
+				:character *character*
+				:active-page "people"
+				)))
 
 
 

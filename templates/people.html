@@ -3,14 +3,79 @@
 {% block content %}
 <div class="grid">
   <div class="left-panel">
-    <ul class="list">
+    <div class="search-wrapper">
+      <label for="search-box">Search:</label>
+      <div class="search-box">
+	<input id="search-box" name="search" class="search-field" type="text" hx-post="/people/search" 
+       hx-trigger="keyup changed delay:500ms" 
+       hx-target="#search-results" 
+       hx-indicator=".htmx-indicator">
+      </div>
+    </div>
+    <ul id="search-results" class="list">
       {% for p in people %}
-        <li><a href="/planets" >{{p.name}}</a></li>
+      <li><a href="/people/{{forloop.counter}}" >{{p.name}}</a></li>
       {% endfor %}
     </ul>
   </div>
   <div class="right-panel">
-    {{outlet}}
+
+    {% if character %}
+    <h3>{{character.name}}</h3>
+    <table>
+      <tr>
+	<td>Height</td>
+	<td>{{character.height}}</td>
+      </tr>
+      <tr>
+	<td>Mass:</td>
+	<td>{{character.mass}}</td>
+      </tr>
+      <tr>
+	<td>Hair Color:</td>
+	<td>{{character.hair--color}}</td>
+      </tr>
+      <tr>
+	<td>Skin Color:</td>
+	<td>{{character.skin--color}}</td>
+      </tr>
+      <tr>
+	<td>Eye Color:</td>
+	<td>{{character.eye--color}}</td>
+      </tr>
+      <tr>
+	<td>Birth Year:</td>
+	<td>{{character.birth--year}}</td>
+      </tr>
+      <tr>
+	<td>Gender:</td>
+	<td>{{character.gender}}</td>
+      </tr>
+      <tr>
+	<td>Home world:</td>
+	<td>    <p><!----></p></td>
+      </tr>
+      <tr>
+	<td>Films:</td>
+	<td>    <p><!----></p></td>
+      </tr>
+      <tr>
+	<td>Species:</td>
+	<td>  <!---->
+	</td>
+      </tr>
+      <tr>
+	<td>Vehicles:</td>
+	<td>    <p><!----></p></td>
+      </tr>
+      <tr>
+	<td>Starships:</td>
+	<td>    <p><!----></p></td>
+      </tr>
+    </table>
+    {% else %}
+    <h2>Please select a character</h2>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
