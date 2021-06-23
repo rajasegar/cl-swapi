@@ -1,0 +1,5 @@
+(in-package :cl-user)
+(print ">>> Building system....")
+(load (merge-pathnames "hello-caveman.asd" *build-dir*))
+(ql:quickload :hello-caveman)
+(print ">>> Done building system")
