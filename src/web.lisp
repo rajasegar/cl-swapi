@@ -6,6 +6,7 @@
         :hello-caveman.view
         :hello-caveman.db
 	:cl-json
+	:cl-ppcre
 	:drakma
 	:cl-who)
 
@@ -78,8 +79,11 @@
   (format t "~a~%" *search-results*)
   (with-html-output-to-string (output nil :prologue nil)
     (loop for p in (rest (assoc :results *search-results*))
-	  do (htm (:li
-		   (:a :href "/people/" (str (cdr (assoc :name p)))))))))
+	  do
+	     (htm (:li
+		   (:a
+		    :href (concatenate 'string "/people/" (cl-ppcre:scan-to-strings "[0-9]+" (cdr (assoc :url p))))
+		       (str (cdr (assoc :name p)))))))))
 
 ;; People show route
 (defroute "/people/:id" (&key id)

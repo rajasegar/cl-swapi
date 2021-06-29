@@ -12,6 +12,7 @@
        hx-indicator=".htmx-indicator">
       </div>
     </div>
+    <h2 class="htmx-indicator" style="color:white; text-align:center">Loading...</h2>
     <ul id="search-results" class="list">
       {% for p in people %}
       <li><a href="/people/{{forloop.counter}}" >{{p.name}}</a></li>

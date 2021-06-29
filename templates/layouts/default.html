@@ -5,7 +5,7 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css">
 </head>
-<body>
+<body hx-boost="true">
 <nav>
   <ul>
     <li><a href="/">Star Wars</a></li>
@@ -15,6 +15,7 @@
     <li>
       <a href="/planets" {% ifequal active-page "planets" %} class="active" {% endifequal %}>Planets</a>
     </li>
+    <!--
     <li>
       <a href="/films">Films</a>
     </li>
@@ -26,7 +27,7 @@
     </li>
     <li>
       <a href="/starships">Starships</a>
-    </li>
+    </li>-->
   </ul>
 </nav>
 <main>
