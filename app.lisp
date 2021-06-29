@@ -1,3 +1,4 @@
+(push #p"/app/" asdf:*central-registry*)
 (ql:quickload :hello-caveman)
 
 (defpackage hello-caveman.app
