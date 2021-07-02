@@ -25,8 +25,7 @@
 	       "sxql"
 	       )
 
-  :components ((:file "main")
-	       (:module "src"
+  :components ((:module "src"
                 :components
                 ((:file "main" :depends-on ("config" "view" "db"))
                  (:file "web" :depends-on ("view"))
