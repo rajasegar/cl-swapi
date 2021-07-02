@@ -1,8 +1,5 @@
 (in-package :cl-user)
 
-(defun initialize-application (&key port)
-  (hello-caveman:start :port port))
-
 (defpackage hello-caveman
   (:use :cl)
   (:import-from :hello-caveman.config
@@ -32,4 +29,9 @@
   (prog1
       (clack:stop *handler*)
     (setf *handler* nil)))
+
+(in-package :cl-user)
+
+(defun initialize-application (&key port)
+  (hello-caveman:start :port port))
 
